@@ -1,0 +1,32 @@
+version: "3.7"
+
+volumes:
+  db:
+
+services:
+  app:
+    image: standings-cross-app
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python -m src runserver
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_DSN=postgres://st-cross:st-cross@postgres:5432/st-cross
+    volumes:
+      - .:/app
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: standings-cross-postgres
+    environment:
+      - POSTGRES_PASSWORD=st-cross
+      - POSTGRES_USER=st-cross
+    volumes:
+      - ./db/:/var/lib/postgresql/data/
+
+
+

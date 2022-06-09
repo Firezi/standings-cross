@@ -1,0 +1,14 @@
+.DS_Store
+venv/
+.idea/
+data/
+*.pyc
+.env
+build/
+dist/
+*.egg-info
+pjproject-py37/
+__pycache__/
+.eggs/
+poetry.lock
+/db
